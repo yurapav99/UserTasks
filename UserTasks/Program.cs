@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using UserTasks.Application.Extensions;
+using UserTasks.Infrastructure.Extension;
 using UserTasks.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,10 @@ builder.Services.AddDbContext<UserAssignmentsDbContext>((serviceProvider, option
     options.UseMySql(connectionString,
                      ServerVersion.AutoDetect(connectionString));
 });
+
+builder.Services.AddDIServices(builder.Configuration);
+
+builder.Services.AddDIServices2(builder.Configuration);
 
 var app = builder.Build();
 

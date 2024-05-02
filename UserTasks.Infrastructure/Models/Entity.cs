@@ -14,7 +14,7 @@ namespace UserTasks.Domain.Models
 
         public Entity()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
         }
     }
 }

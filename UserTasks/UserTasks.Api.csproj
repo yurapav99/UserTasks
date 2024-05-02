@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UserTasks.Application\UserTasks.Application.csproj" />
     <ProjectReference Include="..\UserTasks.Infrastructure1\UserTasks.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserTasks.Application\UserTasks.Application.csproj" />
+    <ProjectReference Include="..\UserTasks.Infrastructure\UserTasks.Domain.csproj" />
   </ItemGroup>
 
 </Project>

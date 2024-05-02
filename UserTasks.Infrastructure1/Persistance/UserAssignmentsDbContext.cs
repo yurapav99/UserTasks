@@ -13,18 +13,13 @@ namespace UserTasks.Infrastructure.Persistance;
 
 public class UserAssignmentsDbContext : DbContext
 {
-    private readonly IConfiguration _configuration;
-
-
-    public UserAssignmentsDbContext(IConfiguration configuration)
+    public UserAssignmentsDbContext()
     {
-        _configuration = configuration;
     }
 
-    public UserAssignmentsDbContext(DbContextOptions<UserAssignmentsDbContext> options, IConfiguration configuration)
+    public UserAssignmentsDbContext(DbContextOptions<UserAssignmentsDbContext> options)
         : base(options)
     {
-        _configuration = configuration;
     }
 
     public DbSet<User> Users { get; set; }
@@ -38,7 +33,7 @@ public class UserAssignmentsDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            var connectionString = _configuration.GetConnectionString("AppDbConnectionString");
+            var connectionString = "Server=127.0.0.1;Port=3332;Database=UserAssignments;Uid=root;Pwd=root;";//todo
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
         base.OnConfiguring(optionsBuilder);
