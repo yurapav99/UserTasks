@@ -1,6 +1,8 @@
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.EntityFrameworkCore;
-using UserTasks.Application.Extensions;
 using UserTasks.Infrastructure.Extension;
+using UserTasks.Infrastructure.Jobs;
 using UserTasks.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +24,21 @@ builder.Services.AddDbContext<UserAssignmentsDbContext>((serviceProvider, option
 
 builder.Services.AddDIServices(builder.Configuration);
 
-builder.Services.AddDIServices2(builder.Configuration);
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+builder.Services.AddHangfire(config =>
+    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+          .UseSimpleAssemblyNameTypeSerializer()
+          .UseRecommendedSerializerSettings()
+          .UseMemoryStorage());
+
+builder.Services.AddHangfireServer();
+
+builder.Services.AddScoped<HangfireConfiguration>();
+
 
 var app = builder.Build();
 
@@ -32,6 +48,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHangfireDashboard("/hangfire");
+
+app.Lifetime.ApplicationStarted.Register(async () => {
+    using var scope = app.Services.CreateScope();
+    var hangfireConfig = scope.ServiceProvider.GetRequiredService<HangfireConfiguration>();
+    await hangfireConfig.ConfigureAsync();  // Asynchronously call the configure method
+});
 
 app.UseHttpsRedirection();
 

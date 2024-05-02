@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using UserTasks.Application.Interfaces;
 using UserTasks.Domain.Models;
+using UserTasks.Infrastructure.Services.Interfaces;
 
 namespace UserTasks.Controllers
 {

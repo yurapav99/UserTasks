@@ -14,6 +14,6 @@ namespace UserTasks.Infrastructure.Interfaces
 
         IUserAssigmentHistoryRepository AssigmentHistoryRepository { get; }
 
-        int Save();
+        Task<int> SaveAsync();
     }
 }

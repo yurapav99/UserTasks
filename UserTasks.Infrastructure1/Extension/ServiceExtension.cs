@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UserTasks.Infrastructure.Interfaces;
 using UserTasks.Infrastructure.Repositories;
+using UserTasks.Infrastructure.Services;
+using UserTasks.Infrastructure.Services.Interfaces;
 
 namespace UserTasks.Infrastructure.Extension
 {
@@ -18,6 +20,11 @@ namespace UserTasks.Infrastructure.Extension
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             services.AddScoped<IUserAssigmentHistoryRepository, UserAssigmentHistoryRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IJobManager, JobManager>();
+
 
             return services;
         }

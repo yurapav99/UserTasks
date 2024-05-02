@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,9 @@ namespace UserTasks.Infrastructure
             AssigmentHistoryRepository = assigmentHistoryRepository;
         }
 
-        public int Save()
+        public async Task<int> SaveAsync()
         {
-            return _dbContext.SaveChanges();
+            return await _dbContext.SaveChangesAsync();
         }
 
         public void Dispose()

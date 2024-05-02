@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ namespace UserTasks.Infrastructure.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<T> GetById(int id);
+        IQueryable<T> Get();
 
-        Task<IEnumerable<T>> GetAll();
+        void Insert(T entity);
 
-        Task Add(T entity);
+        void Update(T entity);
 
         void Delete(T entity);
 
-        void Update(T entity);
+        Task<int> SaveChangesAsync();
+
     }
 }
