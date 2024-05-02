@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserTasks.Domain.Models;
 using UserTasks.Infrastructure.Interfaces;
 using UserTasks.Infrastructure.Persistance;
 
@@ -18,6 +19,11 @@ namespace UserTasks.Infrastructure
         {
             _context = context;
             _dbSet = context.Set<T>();
+        }
+
+        public DbSet<T> DbSet()
+        {
+            return _dbSet;
         }
 
         public IQueryable<T> Get()
@@ -43,6 +49,21 @@ namespace UserTasks.Infrastructure
                 _dbSet.Attach(entity);
             }
             _dbSet.Remove(entity);
+        }
+
+        public void ClearAll()
+        {
+            // Remove all entries from the set
+            foreach (var entity in _dbSet)
+                _dbSet.Remove(entity);
+
+            _context.SaveChanges();
+        }
+
+        public void AddRange(IEnumerable<T> entities)
+        {
+            _dbSet.AddRange(entities);
+            _context.SaveChanges();
         }
 
         public async Task<int> SaveChangesAsync()

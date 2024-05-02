@@ -26,6 +26,8 @@ namespace UserTasks.Infrastructure
             AssigmentHistoryRepository = assigmentHistoryRepository;
         }
 
+        public UserAssignmentsDbContext UserAssignmentsDbContext => _dbContext;
+
         public async Task<int> SaveAsync()
         {
             return await _dbContext.SaveChangesAsync();

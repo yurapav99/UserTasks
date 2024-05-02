@@ -13,22 +13,23 @@ namespace UserTasks.Infrastructure.Jobs
     public class HangfireConfiguration
     {
         private readonly IRecurringJobManager _recurringJobManager;
-        private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IJobManager _jobManager;
 
-        public HangfireConfiguration(IRecurringJobManager recurringJobManager, IBackgroundJobClient backgroundJobClient, IJobManager jobManager)
+        private readonly string JobName = "UserAssignmentsJob";
+        private readonly int TimeIntervalMinutes = 2;
+
+        public HangfireConfiguration(IRecurringJobManager recurringJobManager, IJobManager jobManager)
         {
             _recurringJobManager = recurringJobManager;
-            _backgroundJobClient = backgroundJobClient;
             _jobManager = jobManager;
         }
 
         public async Task ConfigureAsync()
         {
                 _recurringJobManager.AddOrUpdate(
-                    "DataCleanupJob",
+                    JobName,
                     () => AsyncOperationJob(),
-                    Cron.MinuteInterval(2));
+                    Cron.MinuteInterval(TimeIntervalMinutes));
 
         }
 

@@ -28,14 +28,15 @@ public class UserAssignmentsDbContext : DbContext
 
     public DbSet<UserAssigmentHistory> UserAssigmentHistories { get; set; }
 
+    private readonly string connectionString = "Server=127.0.0.1;Port=3332;Database=UserAssignments;Uid=root;Pwd=root;";//todo
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
-            var connectionString = "Server=127.0.0.1;Port=3332;Database=UserAssignments;Uid=root;Pwd=root;";//todo
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
+
         base.OnConfiguring(optionsBuilder);
     }
 
