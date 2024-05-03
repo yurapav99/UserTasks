@@ -54,7 +54,7 @@ app.UseHangfireDashboard("/hangfire");
 app.Lifetime.ApplicationStarted.Register(async () => {
     using var scope = app.Services.CreateScope();
     var hangfireConfig = scope.ServiceProvider.GetRequiredService<HangfireConfiguration>();
-    await hangfireConfig.ConfigureAsync();  // Asynchronously call the configure method
+    await hangfireConfig.ConfigureAsync();
 });
 
 app.UseHttpsRedirection();

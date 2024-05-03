@@ -21,9 +21,9 @@ namespace UserTasks.Infrastructure.Extension
             services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             services.AddScoped<IUserAssigmentHistoryRepository, UserAssigmentHistoryRepository>();
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserAssignmentService, UserAssignmentService>();
 
-            services.AddScoped<IJobManager, JobManager>();
+            services.AddScoped<IBusinessLogicService, BusinessLogicService>();
 
 
             return services;

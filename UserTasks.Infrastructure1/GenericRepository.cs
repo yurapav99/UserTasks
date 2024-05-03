@@ -28,7 +28,7 @@ namespace UserTasks.Infrastructure
 
         public IQueryable<T> Get()
         {
-            return _dbSet.AsNoTracking();  // Return IQueryable for query composition
+            return _dbSet.AsNoTracking();
         }
 
         public void Insert(T entity)
@@ -53,7 +53,6 @@ namespace UserTasks.Infrastructure
 
         public void ClearAll()
         {
-            // Remove all entries from the set
             foreach (var entity in _dbSet)
                 _dbSet.Remove(entity);
 

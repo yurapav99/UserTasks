@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UserTasks.Infrastructure.Services.Interfaces
 {
-    public interface IJobManager
+    public interface IBusinessLogicService
     {
         public Task Proceed();
     }

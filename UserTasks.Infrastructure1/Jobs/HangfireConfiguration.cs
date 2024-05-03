@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserTasks.Infrastructure.Services;
 using UserTasks.Infrastructure.Services.Interfaces;
 
 namespace UserTasks.Infrastructure.Jobs
@@ -13,15 +14,15 @@ namespace UserTasks.Infrastructure.Jobs
     public class HangfireConfiguration
     {
         private readonly IRecurringJobManager _recurringJobManager;
-        private readonly IJobManager _jobManager;
+        private readonly IBusinessLogicService _businessLogicService;
 
         private readonly string JobName = "UserAssignmentsJob";
         private readonly int TimeIntervalMinutes = 2;
 
-        public HangfireConfiguration(IRecurringJobManager recurringJobManager, IJobManager jobManager)
+        public HangfireConfiguration(IRecurringJobManager recurringJobManager, IBusinessLogicService businessLogicService)
         {
             _recurringJobManager = recurringJobManager;
-            _jobManager = jobManager;
+            _businessLogicService = businessLogicService;
         }
 
         public async Task ConfigureAsync()
@@ -30,15 +31,12 @@ namespace UserTasks.Infrastructure.Jobs
                     JobName,
                     () => AsyncOperationJob(),
                     Cron.MinuteInterval(TimeIntervalMinutes));
-
         }
 
         public async Task AsyncOperationJob()
         {
-            await _jobManager.Proceed(); // Execute the async method
+            await _businessLogicService.Proceed(); // Execute the async method
         }
-
-
     }
 
 }

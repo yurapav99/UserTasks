@@ -11,11 +11,11 @@ using UserTasks.Infrastructure.Services.Interfaces;
 
 namespace UserTasks.Infrastructure.Services
 {
-    public class JobManager : IJobManager
+    public class BusinessLogicService : IBusinessLogicService
     {
         public IUnitOfWork _unitOfWork;
 
-        public JobManager(IUnitOfWork unitOfWork)
+        public BusinessLogicService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -51,34 +51,30 @@ namespace UserTasks.Infrastructure.Services
 
                 foreach (var assignment in assignments.Where(a => a.Status != Status.Completed))
                 {
-                    // Get history for this assignment
                     var history = histories
                         .Where(h => h.AssigmentId == assignment.Id);
 
                     var assignedUserIds = history.Select(h => h.UserId).Distinct().ToList();
                     var transferCount = history.Count();
 
-                    // Filter users to exclude the ones already assigned to this task if they need to be assigned at least once
                     var eligibleUsers = users.Where(u => !assignedUserIds.Contains(u.Id)).ToList();
 
                     var attempts = 3;
 
                     if (!eligibleUsers.Any() && transferCount >= attempts)
                     {
-                        // All users have been assigned and the task transferred minimum 3 times
                         assignment.Status = Status.Completed;
                         assignment.UserId = null;
                         assignment.User = null;
                     }
                     else
                     {
-                        if (!eligibleUsers.Any())  // If all have been assigned, restart from any user not the last assigned
+                        if (!eligibleUsers.Any())
                             eligibleUsers = users.Where(u => u.Id != assignment.UserId).ToList();
 
                         var newUser = eligibleUsers.OrderBy(u => Guid.NewGuid()).FirstOrDefault();
                         assignment.UserId = newUser!.Id;
 
-                        // Add to history
                         histories.Add(new UserAssigmentHistory
                         {
                             UserId = newUser.Id,
@@ -87,7 +83,7 @@ namespace UserTasks.Infrastructure.Services
                             Assigment = assignment
                         });
 
-                        assignment.Status = Status.InProgress; // Continue as in progress
+                        assignment.Status = Status.InProgress;
                     }
                 }
 

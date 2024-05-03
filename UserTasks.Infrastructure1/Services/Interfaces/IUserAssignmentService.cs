@@ -7,8 +7,12 @@ using UserTasks.Domain.Models;
 
 namespace UserTasks.Infrastructure.Services.Interfaces
 {
-    public interface  IUserService
+    public interface IUserAssignmentService
     {
         Task<IEnumerable<User>> GetUsers();
+
+        Task<User> AddUser(string name);
+
+        Task<Assignment> AddAssignment(string name);
     }
 }
