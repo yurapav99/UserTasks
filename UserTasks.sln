@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTasks.Api", "UserTasks\UserTasks.Api.csproj", "{6758A92E-A0C8-4271-ABA1-FA4F4B55F464}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTasks.Domain", "UserTasks.Infrastructure\UserTasks.Domain.csproj", "{83D81AB4-13A7-4A76-BB73-F38FA4056D63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTasks.Domain", "UserTasks.Domain\UserTasks.Domain.csproj", "{83D81AB4-13A7-4A76-BB73-F38FA4056D63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTasks.Infrastructure", "UserTasks.Infrastructure1\UserTasks.Infrastructure.csproj", "{D5042C94-1805-4A9F-9C7F-985E66A1AD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTasks.Infrastructure", "UserTasks.Infrastructure\UserTasks.Infrastructure.csproj", "{D5042C94-1805-4A9F-9C7F-985E66A1AD6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

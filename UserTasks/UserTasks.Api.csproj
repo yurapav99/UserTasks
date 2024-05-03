@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserTasks.Infrastructure1\UserTasks.Infrastructure.csproj" />
+    <ProjectReference Include="..\UserTasks.Domain\UserTasks.Domain.csproj" />
+    <ProjectReference Include="..\UserTasks.Infrastructure\UserTasks.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
