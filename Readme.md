@@ -4,7 +4,7 @@
 Task = assignment(I wanted to name it like that)
 
 
-Assignment description, User name = name
+Task description, User name = name
 
 
 ## Run program
