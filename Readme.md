@@ -1,8 +1,12 @@
 # User Tasks manager
 
 ## Please note
-Task = assignment(I wanted to name it like that)\n
-Assignment description = name\n
+Task = assignment(I wanted to name it like that)
+
+
+Assignment description = name
+
+
 User name = name
 
 ## Run program
